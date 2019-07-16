@@ -18,7 +18,7 @@ Este projeto e proposta de arquitetura tem por objetivo propor uma solução vi�
 	Para o Banco B, o qual necessita de velocidade e segurança, foi proposta a utilização do ElastiSearch como banco de dados NoSQL pela sua forma de armazenamento distribuído e indexação que facilita a utilização por ferramentas de Machine Learning. No Microserviço que acessa esta estrutura usamos cacheamento via REDIS e Logstash(monitoramento) para consumo do cache em RAM.
 	Para o Banco C for proposta a utilização do MongoDB pois tem rapidez, robustez e trabalha de forma distribuída, podendo dar velocidade aos acessos aos dados. No microserviço que acessa a estrutura do banco C usamos cacheamento usando apenas o REDIS, também para consumo em RAM.
 
-Payloads Banco A:
+Payloads ServiceDebits:
 ```
  payload = {
 	'CPF': String,
@@ -32,7 +32,7 @@ Payloads Banco A:
 }
 
 
-Payloads Banco B:
+Payloads ServiceAssets:
  payload = {
 	'CPF': String,
  	'Age': Integer,
@@ -44,7 +44,7 @@ Payloads Banco B:
 	}]
 }
 
-Payloads Banco C:
+Payloads ServiceTransactions (Em construção):
  payload = {
 	'CPF': String,
  	'Last_Search': Datetime,
@@ -64,3 +64,29 @@ Payloads Banco C:
 ## Django RestFul APIS:
 
 As APIs foram desenvolvidas usando Python com Django Rest Framework (https://www.django-rest-framework.org) com autenticação JWT (https://jwt.io/).
+
+## Pré-requisitos
+- Docker >= 18.09.7
+- Docker Compose >= 1.24.0
+
+## Bootstrap do Projeto
+Para a inicialização do projeto siga os seguintes STEPS:
+- Navegue até a raiz do projeto (mesmo diretório que o docker-compose.yml)
+- Execute os seguintes comandos:
+```docker-compose up -d```
+ rodar os migrations:
+ ``` docker-compose run service_a python manage.py migrate ```
+ ``` docker-compose run service_b python manage.py migrate ```
+ criar o superusuário dos services:
+ ``` docker-compose run service_a python manage.py createsuperuser ```
+ ``` docker-compose run service_b python manage.py createsuperuser ```
+
+Acessar os endpoints dos serviços:
+- ### Serviço ServiceDebits: http://localhost:8000/
+	- http://localhost:8000/persons/
+	- http://localhost:8000/debits/
+- ### Serviço ServiceDebits: http://localhost:7000/
+	- http://localhost:7000/consumer/
+	- http://localhost:7000/assets/
+
+OBS: DETALHAMENTO DOS PAYLOADS podem ser acessados via endpoint no Browser.
