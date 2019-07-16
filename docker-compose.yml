@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   postgresql_service_a:
-    image: postgres
+    image: postgres:latest
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
@@ -9,7 +9,7 @@ services:
     networks:
       - microservices
   postgresql_service_b:
-    image: postgres
+    image: postgres:latest
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
