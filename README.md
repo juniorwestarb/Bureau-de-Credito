@@ -1,5 +1,5 @@
 # Bureau-de-Credito (Em desenvolvimento)
-Este projeto e proposta de arquitetura tem por objetivo propor uma solução viável para acesso e consumo de informação de 3 bancos de dados com níveis de segurança, criticidade e performance controlados.
+Este projeto e proposta de arquitetura tem por objetivo propor uma solução viável para acesso e consumo de informação de 3 bancos de dados com níveis de segurança, criticidade e performance controlados na linguagem Python.
 
 ## O Problema:
 *Banco A* tem informações críticas e sigilosas e precisa de acesso seguro as informações sem necessidade de velocidade.
@@ -63,4 +63,4 @@ Payloads Banco C:
 
 ## Django RestFul APIS:
 
-As APIs foram desenvolvidas usando Django Rest Framework (https://www.django-rest-framework.org) com autenticação JWT (https://jwt.io/).
+As APIs foram desenvolvidas usando Python com Django Rest Framework (https://www.django-rest-framework.org) com autenticação JWT (https://jwt.io/).
