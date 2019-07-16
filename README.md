@@ -9,6 +9,7 @@ Este projeto e proposta de arquitetura tem por objetivo propor uma solução vi�
 *Banco C* não tem informações críticas e precisa de velocidade.
   
   ARQUITETURA PROPOSTA:
+  ![alt text](arquitetura.png)
  
 ## Justificativa:
   A Arquitetura acima proposta tem um modelo baseado em Microserviços utilizando RESTful APIs em Django com JWT. Entre as camadas de apresentação e as APIS temos um API Getaway controlando as requisições, aumentando assim a segurança e evitando problemas com endpoints diretos. A camada de frontEnd de acessos aos dados usa Angular por motivos de ser bem consolidade e de grande rapidez na leitura e troca de informações com o BackEnd.
