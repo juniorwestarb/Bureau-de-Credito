@@ -1,0 +1,47 @@
+version: '3.1'
+services:
+  postgresql_service_a:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: banco_a
+    networks:
+      - microservices
+  postgresql_service_b:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: banco_b
+    networks:
+      - microservices
+  service_a: 
+    build:
+      dockerfile: ./Dockerfile
+      context: ./apicreditodebits
+    image: junior/apicreditodebits
+    container_name: apicreditodebits
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - '8000:8000'
+    depends_on:
+      - postgresql_service_a
+    networks:
+      - microservices
+  service_b: 
+    build:
+      dockerfile: ./Dockerfile
+      context: ./apicreditoassets
+    image: junior/apicreditoassets
+    container_name: apicreditoassets
+    command: python manage.py runserver 0.0.0.0:7000
+    ports:
+      - '7000:7000'
+    depends_on:
+      - postgresql_service_b
+    networks:
+      - microservices
+networks:
+  microservices:
+    driver: bridge
